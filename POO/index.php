@@ -3,35 +3,56 @@
 // Una clase es tipo o una especie de algo
 class Persona {
   // Atributos
-  public $nombre;
-  public $apellido;
+  protected $nombre; // public, protected, private
+  protected $apellido;
+  public $nickname;
+  public $changedNickname = 0;
 
   // Metodo Constructor
-  public function __construct($nombre, $apellido) {
+  public function __construct($nombre, $apellido, $nickname = null) {
     $this->nombre = $nombre;
     $this->apellido = $apellido;
+    $this->nickname = $nickname;
   }
 
   // Metodos
-  public function fullName() {
+  // Getters
+  public function getNombre() {
+    return $this->nombre;
+  }
+
+  public function getApellido() {
+    return $this->apellido;
+  }
+
+  public function getNombreCompleto() {
     return $this->nombre . ' ' . $this->apellido;
   }
+
+  // Setters
+  public function setNickname( $nickname ) {
+    if ( $this->changedNickname >= 2 ) {
+      echo "No puedes cambiar tu nombre de usuario mas de 2 veces";
+
+      return;
+    }
+
+    $this->nickname = strtoupper($nickname);
+
+    $this->changedNickname ++;
+  }
+
+  // public function setNombre( $Nombre ) {
+  //   $this->nombre = $Nombre;
+  // }
+
+  // public function setApellido( $apellido ) {
+  //   $this->apellido = $apellido;
+  // }
 }
 
-// Objeto
-// $persona1 = new Persona; // Instanciamos la clase Persona
-// $persona1->nombre = "Bernardino";
-// $persona1->apellido = "Villagra";
-// echo $persona1->fullName();
+$persona = new Persona('Jose', 'Lopez');
+$persona->setNickname('joselo');
+// $persona->setNickname('joselo1');
 
-// Objeto
-// $persona2 = new Persona; // Instanciamos la clase Persona
-// $persona2->nombre = "Ramon";
-// $persona2->apellido = "Perez";
-// echo $persona2->fullName();
-
-$persona1 = new Persona("Bernardino", "Villagra");
-
-$persona2 = new Persona("Ramon", "Perez");
-
-echo "{$persona1->fullName()} es amigo de {$persona2->fullName()}";
+echo "{$persona->getNombreCompleto()} tu nombre de usuario es: {$persona->nickname}";
