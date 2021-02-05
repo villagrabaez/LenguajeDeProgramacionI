@@ -31,7 +31,7 @@ class Persona {
 
   // Setters
   public function setNickname( $nickname ) {
-    if ( $this->changedNickname >= 2 ) {
+    if ( $this->changedNickname > 2 ) {
       // echo "No puedes cambiar tu nombre de usuario mas de 2 veces";
       throw new Exception("No puedes cambiar tu nombre de usuario mas de 2 veces");
     }
@@ -53,6 +53,6 @@ class Persona {
 $persona = new Persona('Jose', 'Lopez');
 $persona->setNickname('joselo');
 $persona->setNickname('joselo1');
-$persona->setNickname('joselo2');
+// $persona->setNickname('joselo2');
 
 echo "{$persona->getNombreCompleto()} tu nombre de usuario es: {$persona->nickname}";
